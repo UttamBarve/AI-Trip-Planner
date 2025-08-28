@@ -1,0 +1,18 @@
+1. replaced the api key with 'import.meta.env.VITE_GOOGLE_GEMINI_AI_API_KEY'
+2. changed 'responseMimeType' response to "application/json"
+3. removed the 'async function run()' line and didn't remove the definition of the function but removed the function call run();
+4. make export of 'const chatSession' (The chatSession variable is assigned to mode l.startChat({history: [...]}) (this contain history of previous prompt)) exporting this to use it throughout the application.
+5. removed these lines of code: 
+    'const result = await chatSession.sendMessage("INSERT_INPUT_HERE");
+     console.log(result.response.text());'
+6. showed an added prommpt in options.jsx (constant file) which is used to give the prompt modified by user choices and send to ai to give json (this exported as well)
+7. in the OnGenerateTrip function inside the create-trip component, modified the template prompt with user choices using .replace (like this const FINAL_PROMPT = AI_PROMPT.replace('{location}', formData?.location).replace('{days}', formData?.days)...) 
+8. added console.log(FINAL_PROMPT) to check wheteher receiving right prompt or not
+9. added to the same OnGenerateTrip function 'const result = await chatSession.sendMessage(FINAL_PROMPT)' and using await so make the method  async
+10. then log the result to check ' console.log(result?.response?.text()); '
+
+
+
+
+TO BE COUNTINUED FROM HERE:
+we have get the whoole response of the gemini at once instead of by chunks, now we can move forward witht the video to save response to the data basew
