@@ -1,3 +1,4 @@
+import { Footer } from "@/components/custom/Footer";
 import { Hotels } from "@/components/custom/Hotels";
 import { InfoSection } from "@/components/custom/InfoSection";
 import { PlacesToVisit } from "@/components/custom/PlacesToVisit";
@@ -39,6 +40,7 @@ export const ViewTrip = () => {
         <PlacesToVisit trip={tripData}/>
 
         {/* Footer */}
+        <Footer />
       </div>
    
   );
