@@ -29,6 +29,7 @@ function CreateTrip() {
   const [formData, setFormData] = useState({});
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(0);
   const navigate = useNavigate();
 
   const handleChange = (name, value) => {
@@ -69,7 +70,6 @@ function CreateTrip() {
         config,
         contents,
       });
-      console.log(response);
       const AIResponse = response.candidates[0].content.parts[1].text;
       console.log(AIResponse);
       saveAITrip(AIResponse);
@@ -166,12 +166,19 @@ function CreateTrip() {
           <h2 className="text-xl my-3 font-medium">
             How may days are you planning your trip?
           </h2>
-          <Input
-            className="border-black"
-            placeholder={"Numbers of Days (i.e. 3) "}
-            type="number"
-            onChange={(e) => handleChange("days", e.target.value)}
-          />
+          <div className="flex gap-2">
+            {[1, 2, 3, 4, 5, 6, 7].map((day) => (
+              <button
+                key={day}
+                onClick={() => {handleChange("days", day); setSelectedDay(day)}}
+                className={`px-4 py-2 rounded-lg border hover:shadow-xl  transition-all duration-200 cursor-pointer hover:scale-110 ${
+                  selectedDay === day ? "border-black" : ""
+                }`}
+              >
+                {day}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div>
