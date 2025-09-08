@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
 import {
   AI_PROMPT,
   SelectBudgetOptions,
@@ -170,7 +169,10 @@ function CreateTrip() {
             {[1, 2, 3, 4, 5, 6, 7].map((day) => (
               <button
                 key={day}
-                onClick={() => {handleChange("days", day); setSelectedDay(day)}}
+                onClick={() => {
+                  handleChange("days", day);
+                  setSelectedDay(day);
+                }}
                 className={`px-4 py-2 rounded-lg border hover:shadow-xl  transition-all duration-200 cursor-pointer hover:scale-110 ${
                   selectedDay === day ? "border-black" : ""
                 }`}
