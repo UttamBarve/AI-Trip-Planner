@@ -260,7 +260,7 @@ function CreateTrip() {
           </DialogClose>
           <DialogHeader>
             <DialogTitle>
-              <img src="/logo.svg" alt="" />
+              <img src="/logo.png" alt="" />
               <h2 className="font-bold text-lg mt-4">Sign In With Google</h2>
             </DialogTitle>
             <DialogDescription>

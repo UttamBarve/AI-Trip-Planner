@@ -39,7 +39,7 @@ export const ViewTrip = () => {
         <PlacesToVisit trip={tripData}/>
 
         {/* Footer */}
-        <Footer />
+        
       </div>
    
   );

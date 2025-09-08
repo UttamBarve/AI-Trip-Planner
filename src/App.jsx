@@ -1,14 +1,16 @@
-import { useState } from 'react'
+
 import './App.css'
 import Hero from './components/custom/Hero'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
       {/* Hero Section */}
       <Hero/>
+      <div className='flex items-center justify-center mt-2'>
+      <img src="HeroPlaceholder.png" alt="" />
+      </div>
     </>
   )
 }
