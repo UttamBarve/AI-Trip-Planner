@@ -10,7 +10,6 @@ import { useParams } from "react-router-dom";
 export const ViewTrip = () => {
     const {tripId} =useParams();
     const [tripData, setTripData] = useState([]);
-
     useEffect(()=>{
         tripId&&GetTripData();
     }, [tripId])

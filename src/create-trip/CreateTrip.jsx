@@ -14,14 +14,17 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogClose,
 } from "@/components/ui/dialog";
 import { FcGoogle } from "react-icons/fc";
+import { X } from "lucide-react";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { db } from "@/service/firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+
 
 function CreateTrip() {
   const [place, setPlace] = useState("");
@@ -96,12 +99,14 @@ function CreateTrip() {
     }
 
     const parsedTrip = JSON.parse(jsonMatch[0]);
-
+    const now = new Date();
+    const time = `${now.getHours()}:${now.getMinutes()} ${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}` 
     await setDoc(doc(db, "AITrips", docId), {
       userSelection: formData,
       tripData: parsedTrip,
       userEmail: userEmail,
       id: docId,
+      created: time,
     });
     navigate("/view-trip/" + docId);
   };
@@ -245,6 +250,14 @@ function CreateTrip() {
 
       <Dialog open={openDialog}>
         <DialogContent>
+          <DialogClose asChild>
+            <Button
+              className="hover:bg-black bg-black absolute right-4 top-4 "
+              onClick={() => setOpenDialog(false)}
+            >
+              <X className="h-5 w-5" />
+            </Button>
+          </DialogClose>
           <DialogHeader>
             <DialogTitle>
               <img src="/logo.svg" alt="" />
