@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
-    <div className='flex flex-col items-center justify-center text-gray-500'>
+    <div className='flex flex-col items-center justify-center text-gray-500 mb-10'>
        <div>
         <h2>Created By Uttam Barve</h2>
        </div>

@@ -4,7 +4,7 @@ import { PlaceCards } from "./PlaceCards";
 export const PlacesToVisit = ({ trip }) => {
   return (
     <div>
-      <h2 className="font-bold text-xl mt-5">Daily Plan</h2>
+      <h2 className="font-bold text-xl mt-14 -mb-5">Daily Plan</h2>
       <div>
         {trip?.tripData?.travelPlan?.itinerary?.map((day, idx) => (
           <div key={idx} className="flex flex-col p-4 m-4">

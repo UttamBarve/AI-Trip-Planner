@@ -55,7 +55,7 @@ function Header() {
 
   return (
     <div className="p-3 px-5 shadow-sm flex justify-between items-center">
-      <img src="/logo.svg" alt="" />
+      <img className='h-10 ' src="/logo.png" alt="" />
       <div>
         {user ? (
           <div className="flex gap-5 items-center justify-center">
@@ -111,7 +111,7 @@ function Header() {
           </DialogClose>
           <DialogHeader>
             <DialogTitle>
-              <img src="/logo.svg" alt="" />
+              <img className='' src="/logo.png" alt="" />
               <h2 className="font-bold text-lg mt-4">Sign In With Google</h2>
             </DialogTitle>
             <DialogDescription>

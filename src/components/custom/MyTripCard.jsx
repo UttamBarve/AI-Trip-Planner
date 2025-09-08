@@ -4,10 +4,11 @@ import { MdPeopleAlt } from "react-icons/md";
 import { LuCalendarDays } from "react-icons/lu";
 import { GetPlaceDetails } from "@/service/GlobalApi";
 import { MdCreate } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 export const MyTripCard = ({trip, idx}) => {
   const [photoUrl, setPhotoUrl] = useState("");
-
+  const navigate = useNavigate();
   useEffect(() => {
     console.log(trip)
     trip && GetPlacePhoto();
