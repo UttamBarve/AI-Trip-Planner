@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "../ui/button";
 import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import {
   Dialog,
@@ -22,7 +22,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 function Header() {
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
-  const location = useLocation();   
+  const location = useLocation();
   const currentPath = location.pathname;
   const [openDialog, setOpenDialog] = useState(false);
   const login = useGoogleLogin({
@@ -51,29 +51,40 @@ function Header() {
       });
   };
 
- 
-
   return (
     <div className="p-3 px-5 shadow-sm flex justify-between items-center">
-      <img className='h-10 ' src="/logo.png" alt="" />
+      <img className="h-10 " src="/logo.png" alt="" />
       <div>
         {user ? (
           <div className="flex gap-5 items-center justify-center">
-           {(currentPath !== "/my-trips")? (<Button onClick={()=>navigate("/my-trips")} variant="outline" className="cursor-pointer ">
-              My Trips
-            </Button>):(<Button onClick={()=>navigate("/create-trip")} variant="outline" className="cursor-pointer ">
-              Create Trip
-            </Button>) }
-            
-            <HoverCard>
-              <HoverCardTrigger>
+            {currentPath !== "/my-trips" ? (
+              <Button
+                onClick={() => navigate("/my-trips")}
+                variant="outline"
+                className="cursor-pointer "
+              >
+                My Trips
+              </Button>
+            ) : (
+              <Button
+                onClick={() => navigate("/create-trip")}
+                variant="outline"
+                className="cursor-pointer "
+              >
+                Create Trip
+              </Button>
+            )}
+
+            <Popover>
+              <PopoverTrigger>
+                {" "}
                 <img
                   className="h-[38px] w-[38px] rounded-full hover:scale-90 cursor-pointer"
                   src={user?.picture}
                   alt=""
                 />
-              </HoverCardTrigger>
-              <HoverCardContent className="w-[20px] h-[10px] flex items-center justify-center">
+              </PopoverTrigger>
+              <PopoverContent className="w-[20px] h-[10px] flex items-center justify-center">
                 <Button
                   onClick={() => {
                     googleLogout();
@@ -86,8 +97,8 @@ function Header() {
                 >
                   LogOut
                 </Button>
-              </HoverCardContent>
-            </HoverCard>
+              </PopoverContent>
+            </Popover>
           </div>
         ) : (
           <Button
@@ -103,15 +114,15 @@ function Header() {
         <DialogContent>
           <DialogClose asChild>
             <Button
-              className="hover:bg-black bg-black absolute right-4 top-4 "
+              className="hover:bg-black bg-black absolute right-2 top-2 sm:right-4 sm:top-4 p-2 rounded-full "
               onClick={() => setOpenDialog(false)}
             >
-              <X className="h-5 w-5" />
+              <X className="h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
           </DialogClose>
           <DialogHeader>
             <DialogTitle>
-              <img className='' src="/logo.png" alt="" />
+              <img className="w-45 sm:w-50" src="/logo.png" alt="" />
               <h2 className="font-bold text-lg mt-4">Sign In With Google</h2>
             </DialogTitle>
             <DialogDescription>

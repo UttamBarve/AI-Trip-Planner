@@ -40,7 +40,6 @@ export const PlaceCards = ({ plan, id, trip }) => {
 
       const bestUrl = PHOTO_REF_URL.replace("{NAME}", bestPhoto.name);
       setPhotoUrl(bestUrl);
-      
     } catch (err) {
       console.error("Google API Error:", err.response?.data || err.message);
     }
@@ -55,7 +54,7 @@ export const PlaceCards = ({ plan, id, trip }) => {
       <div className=" border hover:scale-105 rounded-lg hover:shadow-xl transition-all duration-500 cursor-pointer p-5 m-2">
         <div>
           <img
-            className="w-[200px] rounded-xl"
+            className="w-full h-40 sm:h-48 object-cover rounded-xl"
             src={photoUrl || "/placeholder.jpg"}
             alt=""
           />
