@@ -17,9 +17,13 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import { X } from "lucide-react";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Header() {
   const user = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
+  const location = useLocation();   
+  const currentPath = location.pathname;
   const [openDialog, setOpenDialog] = useState(false);
   const login = useGoogleLogin({
     onSuccess: (codeResp) => GetUserProfile(codeResp.access_token),
@@ -47,9 +51,7 @@ function Header() {
       });
   };
 
-  useEffect(() => {
-    console.log(user);
-  });
+ 
 
   return (
     <div className="p-3 px-5 shadow-sm flex justify-between items-center">
@@ -57,9 +59,12 @@ function Header() {
       <div>
         {user ? (
           <div className="flex gap-5 items-center justify-center">
-            <Button variant="outline" className="cursor-pointer ">
+           {(currentPath !== "/my-trips")? (<Button onClick={()=>navigate("/my-trips")} variant="outline" className="cursor-pointer ">
               My Trips
-            </Button>
+            </Button>):(<Button onClick={()=>navigate("/create-trip")} variant="outline" className="cursor-pointer ">
+              Create Trip
+            </Button>) }
+            
             <HoverCard>
               <HoverCardTrigger>
                 <img
@@ -73,6 +78,7 @@ function Header() {
                   onClick={() => {
                     googleLogout();
                     localStorage.clear();
+                    navigate("/");
                     window.location.reload();
                   }}
                   variant="destructive"
