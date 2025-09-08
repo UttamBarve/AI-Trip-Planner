@@ -141,7 +141,7 @@ function CreateTrip() {
   return (
     <div className="sm:px-10 md:px-32 lg:px-56 xl:px-56 px-5 mt-10 flex flex-col ">
       <div>
-        <h2 className="font-bold text-2xl">Tell us your travel preference🏝️</h2>
+        <h2 className="font-bold text-2xl">Tell us your travel preference</h2>
         <p className="mt-3 text-gray-500">
           Just provide some basic information, and our trip planner will
           generate a customized itinerary based on your preferences.

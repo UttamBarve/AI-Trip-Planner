@@ -23,6 +23,7 @@ const router = createBrowserRouter([
       { path: "/my-trips", element: <MyTrips /> },
     ],
   },
+  
 ]);
 
 createRoot(document.getElementById("root")).render(
