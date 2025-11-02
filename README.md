@@ -27,7 +27,7 @@ All generated plans are stored securely using **Firebase**.
 ---
 
 ## 🚀 Setup Instructions 
-git clone https://github.com/your-username/ai-trip-planner.git
+git clone https://github.com/uttambarve/ai-trip-planner.git
 cd ai-trip-planner
 npm install
 Create a .env file in the project root and add your API keys:
