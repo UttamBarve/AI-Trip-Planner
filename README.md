@@ -27,13 +27,12 @@ All generated plans are stored securely using **Firebase**.
 ---
 
 ## 🚀 Setup Instructions 
-git clone https://github.com/uttambarve/ai-trip-planner.git
-cd ai-trip-planner
-npm install
-Create a .env file in the project root and add your API keys:
-env:
-VITE_GEMINI_API_KEY=your_gemini_api_key
-VITE_FIREBASE_API_KEY=your_firebase_api_key
-
-Run the development server
-npm start
+ - git clone https://github.com/uttambarve/ai-trip-planner.git
+ - cd ai-trip-planner
+ - npm install
+ - Create a .env file in the project root and add your API keys:
+ - env:
+   - VITE_GEMINI_API_KEY=your_gemini_api_key
+   - VITE_FIREBASE_API_KEY=your_firebase_api_key
+ - Run the development server
+ - npm start
