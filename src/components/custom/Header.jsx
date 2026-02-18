@@ -17,7 +17,7 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import { X } from "lucide-react";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function Header() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -53,7 +53,9 @@ function Header() {
 
   return (
     <div className="p-3 px-5 shadow-sm flex justify-between items-center">
+      <Link to="/">
       <img className="h-10 " src="/logo.png" alt="" />
+      </Link>
       <div>
         {user ? (
           <div className="flex gap-5 items-center justify-center">

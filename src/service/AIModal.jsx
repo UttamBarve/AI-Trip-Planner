@@ -1,9 +1,4 @@
-// To run this code you need to install the following dependencies:
-// npm install @google/genai mime
-// npm install -D @types/node
-
 import { GoogleGenAI } from "@google/genai";
-
 export const ai = new GoogleGenAI({
   apiKey: import.meta.env.VITE_GOOGLE_GEMINI_AI_API_KEY,
 });

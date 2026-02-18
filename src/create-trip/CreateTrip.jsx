@@ -25,7 +25,6 @@ import { doc, setDoc } from "firebase/firestore";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
-
 function CreateTrip() {
   const [place, setPlace] = useState("");
   const [formData, setFormData] = useState({});
@@ -33,6 +32,10 @@ function CreateTrip() {
   const [loading, setLoading] = useState(false);
   const [selectedDay, setSelectedDay] = useState(0);
   const navigate = useNavigate();
+
+  const [useManualLocation, setUseManualLocation] = useState(false);
+  const [manualLocation, setManualLocation] = useState("");
+  const [typingTimeout, setTypingTimeout] = useState(null);
 
   const handleChange = (name, value) => {
     setFormData({
@@ -100,7 +103,7 @@ function CreateTrip() {
 
     const parsedTrip = JSON.parse(jsonMatch[0]);
     const now = new Date();
-    const time = `${now.getHours()}:${now.getMinutes()} ${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}` 
+    const time = `${now.getHours()}:${now.getMinutes()} ${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
     await setDoc(doc(db, "AITrips", docId), {
       userSelection: formData,
       tripData: parsedTrip,
@@ -125,7 +128,7 @@ function CreateTrip() {
             Authorization: `Bearer ${tokenInfo?.access_token}`,
             Accept: "Application/json",
           },
-        }
+        },
       )
       .then((resp) => {
         console.log(resp);
@@ -149,22 +152,76 @@ function CreateTrip() {
       </div>
 
       <div className="mt-5 flex flex-col gap-5">
-        <div className="">
-          <h2 className="text-xl my-3 font-medium">
-            What is destination of choice?
-          </h2>
-          <GooglePlacesAutocomplete
-            apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
-            selectProps={{
-              value: place,
-              onChange: (val) => {
-                setPlace(val);
-                handleChange("location", val.label);
-              },
-              placeholder: "Search location...",
-            }}
-          />
-        </div>
+        <div>
+  <h2 className="text-xl my-3 font-medium">
+    What is destination of choice?
+  </h2>
+
+  {!useManualLocation ? (
+    <>
+      <GooglePlacesAutocomplete
+        apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
+        selectProps={{
+          value: place,
+          placeholder: "Search location...",
+          onChange: (val) => {
+            if (!val) return;
+            setPlace(val);
+            handleChange("location", val.label);
+          },
+          onInputChange: (inputValue, { action }) => {
+            if (action === "input-change") {
+              if (typingTimeout) clearTimeout(typingTimeout);
+
+              const timeout = setTimeout(() => {
+                // If user typed but no place selected → fallback
+                if (!place && inputValue.length > 2) {
+                  setUseManualLocation(true);
+                  setManualLocation(inputValue);
+                  handleChange("location", inputValue);
+                }
+              }, 2000);
+
+              setTypingTimeout(timeout);
+            }
+          },
+        }}
+      />
+
+      <p
+        onClick={() => setUseManualLocation(true)}
+        className="text-sm text-blue-600 cursor-pointer mt-2"
+      >
+        Can’t find your location? Enter manually
+      </p>
+    </>
+  ) : (
+    <>
+      <input
+        type="text"
+        value={manualLocation}
+        onChange={(e) => {
+          setManualLocation(e.target.value);
+          handleChange("location", e.target.value);
+        }}
+        placeholder="Enter city / state / country"
+        className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+      />
+
+      <p
+        onClick={() => {
+          setUseManualLocation(false);
+          setManualLocation("");
+          setPlace(null);
+        }}
+        className="text-sm text-blue-600 cursor-pointer mt-2"
+      >
+        Use Google location search instead
+      </p>
+    </>
+  )}
+</div>
+
 
         <div>
           <h2 className="text-xl my-3 font-medium">
